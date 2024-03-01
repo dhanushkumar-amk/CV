@@ -24,7 +24,7 @@
 
     <title>Responsive resume cv</title>
   </head>
-  <body>
+  <body >
     <!--========== HEADER ==========-->
     <header
       class="l-header"
@@ -147,8 +147,14 @@
                 </span> -->
               </div>
             </div>
-          </section>
+          
+            <!-- theme change button -->
+            <i class='bx bx-moon change-theme' title="theme" id="theme-button"></i>
 
+            <!-- download button -->
+            <i class='bx bx-download generate-pdf'title="Generate PDF" id="resume-button"></i>
+
+          </section>
           <!--========== SOCIAL ==========-->
           <section class="social section">
             <h2 class="section-title">Social</h2>
@@ -370,23 +376,130 @@
           <section
             class="references section"
             id="references">
+            <h2 class="section-title">Certificates</h2>
+            <div class="reference__container bd-grid">
+              <div class="reference__content bd-grid">
+                <span class="reference__subtitle">sr.Director</span>
+                <h3 class="reference__title">B . Sanjay Kumar</h3>
+                <ul class="reference__contact">
+                  <li>Phone: 1234567890</li>
+                  <li>Email: sanjay@gmail.com</li>
+                  
+                </ul>
+              </div>
+              <div class="reference__content bd-grid">
+                <span class="reference__subtitle">Mag.Director</span>
+                <h3 class="reference__title">V . Ashwin</h3>
+                <ul class="reference__contact">
+                  <li>Phone: 1234567890</li>
+                  <li>Email: ashwin@gmail.com</li>
+
+                </ul>
+              </div>
+            </div>
+            
           </section>
 
           <!--========== LANGUAGES ==========-->
-          <section class="languages section"> </section>
+          <section class="languages section">
+            <h2 class="section-title">Language</h2>
+            <div class="language__container">
+              <ul class="language__content bd-grid">
+                <li class="language__name">
+                  <span class="language__circle"></span> Tamil
+                </li>
+                <li class="language__name">
+                  <span class="language__circle"></span> English
+                </li>
+                <!-- <li class="language__name">
+                  <span class="language__circle"></span>French
+                </li> -->
+              </ul>
+            </div>
+            
+          </section>
 
           <!--========== INTERESTS ==========-->
-          <section class="interests section"> </section>
+          <section class="interests section">
+            <h2 class="section-title">Interests</h2> 
+          
+          <div class="interests__container bd-grid">
+            <div class="interests__content">
+              <i class="bx bx-headphone interests__icon"></i>
+              <span class="interests__name">Music</span>
+            </div>
+            <div class="interests__content">
+              <i class='bx bx-game interests__icon'></i>
+              <span class="interests__name">Games</span>
+            </div>
+            <div class="interests__content">
+              <i class='bx bxl-sketch interests__icon' ></i>
+              <span class="interests__name">Design</span>
+            </div>
+            <div class="interests__content">
+              <i class='bx bx-sleepy interests__icon' ></i>
+              <span class="interests__name">Sleeping</span>
+            </div>
+
+
+
+          </div>
+          
+          
+          </section>
         </div>
       </div>
     </main>
 
     <!--========== SCROLL TOP ==========-->
-
+<a href="#" class="scrolltop" id="scroll-top">
+  <i class='bx bx-up-arrow-alt scrolltop__icon' ></i>
+</a>
     <!--========== HTML2PDF ==========-->
     <script src="assets/js/html2pdf.bundle.min.js"></script>
 
     <!--========== MAIN JS ==========-->
     <script src="assets/js/main.js"></script>
+    <script>
+      function scaleCv() {
+  document.body.classList.add('scale-cv');
+}
+/*==================== REMOVE THE SIZE WHEN THE CV IS DOWNLOADED ====================*/
+function removeScale() {
+  document.body.classList.remove('scale-cv');
+}
+/*==================== GENERATE PDF ====================*/
+// PDF generated area
+let resumeButton = document.getElementById('resume-button');
+
+let areaCv = document.getElementById('area-cv');
+
+// Html2pdf options
+let opt = {
+  margin: 0,
+  filename: 'myResume.pdf',
+  image: { type: 'jpeg', quality: 0.98 },
+  html2canvas: { scale: 4 },
+  jsPDF: { format: 'a4', orientation: 'portrait' },
+};
+
+// Function to call areaCv and Html2Pdf options
+
+function generateResume() {
+  html2pdf(areaCv, opt);
+}
+
+// When the button is clicked, it executes the three functions
+resumeButton.addEventListener('click', () => {
+  // 1. The class .scale-cv is added to the body, where it reduces the size of the elements
+  scaleCv();
+});
+
+// 2. The PDF is generated
+generateResume();
+
+// 3. The .scale-cv class is removed from the body after 5 seconds to return to normal size.
+setTimeout(removeScale, 5000)
+    </script>
   </body>
 </html>
